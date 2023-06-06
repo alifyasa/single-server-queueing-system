@@ -6,7 +6,7 @@ use single_server_queueing_system::{
 };
 
 fn main() {
-    Logger::init(log::LevelFilter::Debug);
+    Logger::init(log::LevelFilter::Info);
     let args = Args::parse();
     log::info!(
         "Starting Single-Server Queue Simulation with Parameters: \n \n{}\n",
