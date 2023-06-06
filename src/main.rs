@@ -6,7 +6,7 @@ use single_server_queueing_system::{
 };
 
 fn main() {
-    Logger::init(log::LevelFilter::Info);
+    Logger::init(log::LevelFilter::Debug);
     let args = Args::parse();
     log::info!(
         "Starting Single-Server Queue Simulation with Parameters: \n \n{}\n",
@@ -14,7 +14,7 @@ fn main() {
     );
     let mut sim_state: SimulationState = SimulationRoutine::init(args);
     log::info!("Running Simulation ...");
-    while sim_state.get_number_delayed() < sim_state.num_delays_required {
+    while sim_state.is_not_termination() {
         // Determine next event
         let next_event = SimulationRoutine::timings(&mut sim_state);
         // Handle Event

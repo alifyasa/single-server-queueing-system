@@ -1,8 +1,11 @@
-#[derive(Eq, Hash, PartialEq, Clone, Copy)]
-/// Types of an Event in the simulation
+#[derive(Eq, Hash, PartialEq, Clone, Copy, Debug, PartialOrd, Ord)]
+/// Types of an Event in the simulation.
+/// DEPARTURE < END < ARRIVAL. This fact is used in timing
 pub enum EventType {
-    /// Arrival of a new customer
-    ARRIVAL,
     /// Server finished serving a costumer
     DEPARTURE,
+    /// Service Ends
+    END,
+    /// Arrival of a new customer
+    ARRIVAL,
 }

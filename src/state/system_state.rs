@@ -7,7 +7,6 @@ use super::{
     event_type::EventType, server_status::ServerStatus, statistical_counter::StatisticalCounter,
 };
 
-#[allow(dead_code)]
 pub struct SystemState {
     pub server_status: ServerStatus,
     /// Queue of customer, represented by a vector of arrival time
@@ -67,7 +66,7 @@ impl Display for SystemState {
                 "     Time of Last Event : {}\n",
                 "     Simulation Clock   : {}\n",
                 "     Next Arrival       : {}\n",
-                "     Next Departure     : {}\n",
+                "     Next Departure     : {}",
             ),
             match self.server_status {
                 ServerStatus::BUSY => "BUSY",

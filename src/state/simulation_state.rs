@@ -9,7 +9,9 @@ pub struct SimulationState {
     pub pdf_interarrival: rand_distr::Exp<f64>,
     pub pdf_service: rand_distr::Exp<f64>,
     /// Number of delays before termination
-    pub num_delays_required: usize,
+    pub num_delays_required: Option<usize>,
+    pub max_simulation_time: Option<f64>,
+    pub max_sim_time_event_reached: bool,
 }
 
 impl SimulationState {
@@ -30,12 +32,23 @@ impl SimulationState {
                     std::process::exit(-1);
                 }
             },
-            num_delays_required: args.num_delays_required,
+            num_delays_required: args.term_args.num_delays_required,
+            max_simulation_time: args.term_args.max_sim_time,
+            max_sim_time_event_reached: false,
         };
     }
 
-    pub fn get_number_delayed(&self) -> usize {
+    fn get_number_delayed(&self) -> usize {
         return self.system_state.statistical_counter.number_delayed;
+    }
+
+    pub fn is_not_termination(&self) -> bool {
+        let (num_delay, max_time) = (self.num_delays_required, self.max_simulation_time);
+        match (num_delay, max_time) {
+            (Some(num_delay), _) => self.get_number_delayed() < num_delay,
+            (_, Some(..)) => !self.max_sim_time_event_reached,
+            (_, _) => unreachable!(),
+        }
     }
 }
 

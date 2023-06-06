@@ -12,11 +12,20 @@ impl SimulationRoutine {
         sim_state
             .system_state
             .event_list
-            .insert(EventType::DEPARTURE, f64::MAX);
+            .insert(EventType::DEPARTURE, f64::INFINITY);
         sim_state
             .system_state
             .event_list
             .insert(EventType::ARRIVAL, Self::get_next_arrival(&sim_state));
+        match sim_state.max_simulation_time {
+            Some(time) => {
+                sim_state
+                    .system_state
+                    .event_list
+                    .insert(EventType::END, time);
+            }
+            None => {}
+        }
         return sim_state;
     }
 }
