@@ -1,12 +1,12 @@
 use crate::{
-    helpers::argument_parser::Arguments,
+    helpers::argument_parser::Args,
     state::{event_type::EventType, simulation_state::SimulationState},
 };
 
 use super::SimulationRoutine;
 
 impl SimulationRoutine {
-    pub fn init(args: Arguments) -> SimulationState {
+    pub fn init(args: Args) -> SimulationState {
         log::info!("Initializing Simulation");
         let mut sim_state = SimulationState::new(args);
         sim_state

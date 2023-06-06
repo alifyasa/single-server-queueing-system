@@ -1,6 +1,6 @@
 use std::fmt::Display;
 
-use crate::helpers::argument_parser::Arguments;
+use crate::helpers::argument_parser::Args;
 
 use super::system_state::SystemState;
 
@@ -13,7 +13,7 @@ pub struct SimulationState {
 }
 
 impl SimulationState {
-    pub fn new(args: Arguments) -> SimulationState {
+    pub fn new(args: Args) -> SimulationState {
         return SimulationState {
             system_state: SystemState::new(),
             pdf_interarrival: match rand_distr::Exp::new(1.0 / args.mean_interarrival) {

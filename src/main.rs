@@ -1,12 +1,13 @@
+use clap::Parser;
 use single_server_queueing_system::{
-    helpers::{argument_parser::Arguments, logger::Logger},
+    helpers::{argument_parser::Args, logger::Logger},
     routine::SimulationRoutine,
     state::simulation_state::SimulationState,
 };
 
 fn main() {
     Logger::init(log::LevelFilter::Info);
-    let args: Arguments = Arguments::parse();
+    let args = Args::parse();
     log::info!(
         "Starting Single-Server Queue Simulation with Parameters: \n \n{}\n",
         args
